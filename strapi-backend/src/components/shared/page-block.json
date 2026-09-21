@@ -1,8 +1,8 @@
 {
   "kind": "component",
-  "collectionName": "shared",
+  "collectionName": "components_shared_page_blocks",
   "info": {
-    "name": "page-block",
+    "name": "pageBlock",
     "description": "页面内容块"
   },
   "attributes": {

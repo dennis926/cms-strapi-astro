@@ -1,8 +1,8 @@
 {
   "kind": "component",
-  "collectionName": "shared",
+  "collectionName": "components_shared_geo_metas",
   "info": {
-    "name": "geo-meta",
+    "name": "geoMeta",
     "description": "GEO元数据"
   },
   "attributes": {

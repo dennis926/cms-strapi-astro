@@ -1,10 +1,14 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
   "info": {
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "分类",
     "name": "Category",
     "description": "分类"
   },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
   "attributes": {
     "name": { "type": "string", "required": true },
     "slug": { "type": "uid", "targetField": "name" },
@@ -15,6 +19,6 @@
       "relation": "manyToOne",
       "target": "api::category.category"
     },
-    "seo": { "type": "component", "component": "shared.seo" }
+    "seo": { "type": "component", "component": "shared.seo", "repeatable": false }
   }
 }

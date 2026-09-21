@@ -8,7 +8,7 @@ const API_TOKEN = import.meta.env.PUBLIC_API_TOKEN || '';
 /**
  * 获取API URL
  */
-export function getApiUrl() {
+export function getApiUrl(): string {
   return API_URL;
 }
 

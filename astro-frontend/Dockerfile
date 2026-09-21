@@ -1,19 +1,23 @@
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install --production
+
+COPY . .
+RUN npm run build
+
+# 生产镜像
 FROM node:20-alpine
 
 WORKDIR /app
 
-# 安装依赖
-COPY package*.json ./
-RUN npm install
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package.json ./
 
-# 复制项目文件
-COPY . .
+RUN npm install --production
 
-# 构建Astro
-RUN npm run build
+EXPOSE 4321
 
-# 暴露端口
-EXPOSE 3000
-
-# 启动命令
-CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0", "--port", "3000"]
+CMD ["node", "dist/server/entry.mjs"]

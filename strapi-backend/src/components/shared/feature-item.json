@@ -1,8 +1,8 @@
 {
   "kind": "component",
-  "collectionName": "shared",
+  "collectionName": "components_shared_feature_items",
   "info": {
-    "name": "feature-item",
+    "name": "featureItem",
     "description": "产品特性"
   },
   "attributes": {

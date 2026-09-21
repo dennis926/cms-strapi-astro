@@ -1,74 +1,94 @@
 version: '3.8'
 
 services:
+  # PostgreSQL 16 数据库
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-strapi_secure_password_2026}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U strapi"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis 7 缓存
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "127.0.0.1:6379:6379"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Meilisearch 全文搜索
+  meilisearch:
+    image: getmeili/meilisearch:v1
+    environment:
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-meili_master_key_2026}
+      MEILI_ENV: production
+    volumes:
+      - meilisearch_data:/meili_data
+    ports:
+      - "127.0.0.1:7700:7700"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7700/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
   # Strapi 5 CMS
   strapi:
     build:
       context: ./strapi-backend
       dockerfile: Dockerfile
     environment:
-      - DATABASE_HOST=postgres
-      - DATABASE_PORT=5432
-      - DATABASE_NAME=strapi
-      - DATABASE_USERNAME=strapi
-      - DATABASE_PASSWORD=strapi_password_here
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - ADMIN_JWT_SECRET=your_admin_jwt_secret_here
-      - JWT_SECRET=your_jwt_secret_here
-      - APP_KEYS=key1,key2,key3,key4
-      - API_TOKEN_SALT=your_api_token_salt_here
-      - TRANSFER_TOKEN_SALT=your_transfer_token_salt_here
-      - MEILISEARCH_HOST=http://meilisearch:7700
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1337
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-strapi_secure_password_2026}
+      DATABASE_SSL: false
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET:-change_this_admin_jwt_secret_2026}
+      JWT_SECRET: ${JWT_SECRET:-change_this_jwt_secret_2026}
+      APP_KEYS: ${APP_KEYS:-key1,key2,key3,key4}
+      API_TOKEN_SALT: ${API_TOKEN_SALT:-change_this_api_token_salt}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT:-change_this_transfer_token_salt}
+      MEILISEARCH_HOST: http://meilisearch:7700
+      MEILISEARCH_KEY: ${MEILI_MASTER_KEY:-meili_master_key_2026}
+      PUBLIC_SITE_URL: https://www.liangyijianye.cn
+      FRONTEND_BUILD_HOOK: https://www.liangyijianye.cn/api/revalidate
     ports:
-      - "1337:1337"
-    depends_on:
-      - postgres
-      - redis
-      - meilisearch
+      - "127.0.0.1:1337:1337"
     volumes:
       - strapi_uploads:/app/public/uploads
-    networks:
-      - cms-network
-    restart: unless-stopped
-
-  # PostgreSQL 16 数据库
-  postgres:
-    image: postgres:16-alpine
-    environment:
-      - POSTGRES_DB=strapi
-      - POSTGRES_USER=strapi
-      - POSTGRES_PASSWORD=strapi_password_here
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - cms-network
-    restart: unless-stopped
-
-  # Redis 7 缓存
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    networks:
-      - cms-network
-    restart: unless-stopped
-
-  # Meilisearch 全文搜索
-  meilisearch:
-    image: getmeili/meilisearch:v1
-    ports:
-      - "7700:7700"
-    volumes:
-      - meilisearch_data:/meili_data
-    environment:
-      - MEILI_MASTER_KEY=your_meilisearch_master_key
-    networks:
-      - cms-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      meilisearch:
+        condition: service_healthy
     restart: unless-stopped
 
   # Astro 前端
@@ -76,23 +96,18 @@ services:
     build:
       context: ./astro-frontend
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
     environment:
-      - PUBLIC_API_URL=http://localhost:1337
-      - PUBLIC_SITE_URL=http://localhost:3000
+      NODE_ENV: production
+      PUBLIC_API_URL: http://strapi:1337
+      PUBLIC_SITE_URL: https://www.liangyijianye.cn
+    ports:
+      - "127.0.0.1:3000:4321"
     depends_on:
       - strapi
-    networks:
-      - cms-network
     restart: unless-stopped
 
 volumes:
   postgres_data:
   redis_data:
-  strapi_uploads:
   meilisearch_data:
-
-networks:
-  cms-network:
-    driver: bridge
+  strapi_uploads:

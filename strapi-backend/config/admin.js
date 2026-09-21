@@ -1,12 +1,17 @@
 module.exports = ({ env }) => ({
-  // 管理员权限配置
-  admin: {
-    auth: {
-      secret: env('ADMIN_JWT_SECRET', 'your-admin-jwt-secret'),
+  auth: {
+    secret: env('ADMIN_JWT_SECRET', 'your-admin-jwt-secret-change-in-production'),
+  },
+  apiToken: {
+    salt: env('API_TOKEN_SALT', 'your-api-token-salt-change-in-production'),
+  },
+  transfer: {
+    token: {
+      salt: env('TRANSFER_TOKEN_SALT', 'your-transfer-token-salt-change-in-production'),
     },
-    // 启用API token
-    apiToken: {
-      salt: env('API_TOKEN_SALT', 'your-api-token-salt'),
-    },
+  },
+  flags: {
+    nps: env.bool('FLAG_NPS', true),
+    promoteEE: env.bool('FLAG_PROMOTE_EE', true),
   },
 });

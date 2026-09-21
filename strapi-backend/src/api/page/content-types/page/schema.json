@@ -1,10 +1,14 @@
 {
   "kind": "collectionType",
-  "collectionName": "pages",
   "info": {
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "页面",
     "name": "Page",
     "description": "单页（关于我们、联系我们等）"
   },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
   "attributes": {
     "title": { "type": "string", "required": true },
     "slug": { "type": "uid", "targetField": "title" },
@@ -15,7 +19,7 @@
       "default": "default"
     },
     "blocks": { "type": "component", "component": "shared.page-block", "repeatable": true },
-    "seo": { "type": "component", "component": "shared.seo" },
-    "geoMeta": { "type": "component", "component": "shared.geo-meta" }
+    "seo": { "type": "component", "component": "shared.seo", "repeatable": false },
+    "geoMeta": { "type": "component", "component": "shared.geo-meta", "repeatable": false }
   }
 }

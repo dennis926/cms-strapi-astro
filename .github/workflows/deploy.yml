@@ -1,0 +1,53 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: |
+            strapi-backend/package-lock.json
+            astro-frontend/package-lock.json
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Strapi Docker image
+        run: |
+          cd strapi-backend
+          docker build -t cms-strapi:latest .
+
+      - name: Build Astro Docker image
+        run: |
+          cd astro-frontend
+          docker build -t cms-astro:latest .
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to server
+        run: |
+          echo "部署脚本待配置"
+          # 实际部署时配置SSH或Webhook

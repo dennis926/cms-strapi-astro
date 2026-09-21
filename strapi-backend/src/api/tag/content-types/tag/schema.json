@@ -1,10 +1,14 @@
 {
   "kind": "collectionType",
-  "collectionName": "tags",
   "info": {
+    "singularName": "tag",
+    "pluralName": "tags",
+    "displayName": "标签",
     "name": "Tag",
     "description": "标签"
   },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
   "attributes": {
     "name": { "type": "string", "required": true },
     "slug": { "type": "uid", "targetField": "name" },
