@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  /* 2026 Awwwards风格设计令牌 */
+  --color-primary: oklch(0.55 0.18 250);
+  --color-primary-light: oklch(0.65 0.15 250);
+  --color-primary-dark: oklch(0.45 0.20 250);
+  --color-surface: oklch(0.98 0.005 250);
+  --color-surface-elevated: oklch(0.96 0.008 250);
+  --color-text: oklch(0.20 0.01 250);
+  --color-text-muted: oklch(0.50 0.01 250);
+  --color-border: oklch(0.90 0.005 250);
+  
+  /* 字体 */
+  --font-display: "Instrument Serif", serif;
+  --font-body: "Satoshi", "Noto Sans SC", sans-serif;
+  
+  /* 间距 */
+  --spacing-flow: clamp(1rem, 2vw, 3rem);
+  --spacing-section: clamp(3rem, 8vw, 8rem);
+  
+  /* 圆角 */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px oklch(0 0 0 / 0.07);
+  --shadow-lg: 0 10px 15px oklch(0 0 0 / 0.1);
+}
+
+/* 基础样式 */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  line-height: 1.6;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+/* 选中文本样式 */
+::selection {
+  background: var(--color-primary);
+  color: white;
+}

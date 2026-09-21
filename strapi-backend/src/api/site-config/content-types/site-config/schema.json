@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "siteConfig",
+  "info": {
+    "name": "Site Config",
+    "description": "站点基本信息配置"
+  },
+  "attributes": {
+    "siteName": { "type": "string", "required": true },
+    "logo": { "type": "media", "allowedTypes": ["images"] },
+    "favicon": { "type": "media", "allowedTypes": ["images"] },
+    "description": { "type": "text" },
+    "keywords": { "type": "text" },
+    "contactEmail": { "type": "email" },
+    "contactPhone": { "type": "string" },
+    "address": { "type": "text" },
+    "icp": { "type": "string" },
+    "socialLinks": { "type": "json" },
+    "footerText": { "type": "text" }
+  }
+}

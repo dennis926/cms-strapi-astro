@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "name": "Product",
+    "description": "产品"
+  },
+  "attributes": {
+    "name": { "type": "string", "required": true },
+    "slug": { "type": "uid", "targetField": "name" },
+    "subtitle": { "type": "string" },
+    "description": { "type": "richtext", "required": true },
+    "cover": { "type": "media", "allowedTypes": ["images"] },
+    "gallery": { "type": "media", "allowedTypes": ["images"], "multiple": true },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag"
+    },
+    "specifications": { "type": "json" },
+    "features": { "type": "component", "component": "shared.feature-item", "repeatable": true },
+    "seo": { "type": "component", "component": "shared.seo" },
+    "geoMeta": { "type": "component", "component": "shared.geo-meta" },
+    "publishedAt": { "type": "datetime" }
+  }
+}

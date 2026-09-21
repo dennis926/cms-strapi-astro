@@ -1,0 +1,90 @@
+---
+// 首页模板
+import Layout from '../layouts/Layout.astro';
+import { getApiUrl } from '../utils/api';
+
+// 获取最新内容
+const apiUrl = getApiUrl();
+---
+
+<Layout title="首页" description="卿尔美 - 健康食品品牌">
+  <!-- Hero区域 -->
+  <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-surface-elevated"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
+        卿尔美
+      </h1>
+      <p class="text-xl md:text-2xl text-text-muted max-w-2xl mx-auto mb-8">
+        专注健康食品，传承养生智慧
+      </p>
+      <div class="flex gap-4 justify-center">
+        <a href="/products" class="px-8 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
+          了解产品
+        </a>
+        <a href="/about" class="px-8 py-3 border border-border rounded-md hover:bg-surface-elevated transition-colors">
+          关于我们
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 产品展示 -->
+  <section class="py-section">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-center mb-12">主打产品</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- 产品卡片占位 -->
+        <div class="p-6 bg-surface-elevated rounded-lg shadow-md">
+          <div class="w-full h-48 bg-border rounded-md mb-4"></div>
+          <h3 class="text-xl font-semibold mb-2">金善加</h3>
+          <p class="text-text-muted">益生菌健康饮品</p>
+        </div>
+        <div class="p-6 bg-surface-elevated rounded-lg shadow-md">
+          <div class="w-full h-48 bg-border rounded-md mb-4"></div>
+          <h3 class="text-xl font-semibold mb-2">长青元</h3>
+          <p class="text-text-muted">营养补充系列</p>
+        </div>
+        <div class="p-6 bg-surface-elevated rounded-lg shadow-md">
+          <div class="w-full h-48 bg-border rounded-md mb-4"></div>
+          <h3 class="text-xl font-semibold mb-2">卿尔美</h3>
+          <p class="text-text-muted">健康食品系列</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 健康资讯 -->
+  <section class="py-section bg-surface-elevated">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-center mb-12">健康资讯</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 文章卡片占位 -->
+        {
+          Array.from({ length: 6 }).map((_, i) => (
+            <article class="bg-surface rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-full h-40 bg-border"></div>
+              <div class="p-4">
+                <h3 class="font-semibold mb-2">秋季养生指南</h3>
+                <p class="text-sm text-text-muted">2026年9月21日</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 招商合作CTA -->
+  <section class="py-section">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl md:text-4xl font-bold mb-6">招商合作</h2>
+      <p class="text-text-muted text-lg mb-8">
+        加入我们，共创健康事业
+      </p>
+      <a href="/franchise" class="inline-block px-8 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
+        了解加盟政策
+      </a>
+    </div>
+  </section>
+</Layout>

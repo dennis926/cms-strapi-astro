@@ -1,0 +1,22 @@
+{
+  "kind": "component",
+  "collectionName": "shared",
+  "info": {
+    "name": "seo",
+    "description": "SEO元数据"
+  },
+  "attributes": {
+    "seoTitle": { "type": "string", "maxLength": 70, "required": true },
+    "seoDescription": { "type": "text", "maxLength": 160, "required": true },
+    "seoCanonical": { "type": "string", "maxLength": 2048 },
+    "seoRobots": {
+      "type": "enumeration",
+      "enum": ["index,follow", "noindex", "nofollow", "noindex,nofollow"],
+      "default": "index,follow"
+    },
+    "ogTitle": { "type": "string", "maxLength": 70 },
+    "ogDescription": { "type": "text", "maxLength": 200 },
+    "ogImage": { "type": "media", "allowedTypes": ["images"] },
+    "keywords": { "type": "text" }
+  }
+}

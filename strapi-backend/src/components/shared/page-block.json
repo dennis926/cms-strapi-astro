@@ -1,0 +1,21 @@
+{
+  "kind": "component",
+  "collectionName": "shared",
+  "info": {
+    "name": "page-block",
+    "description": "页面内容块"
+  },
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["hero", "features", "testimonials", "cta", "stats", "gallery", "text", "faq"],
+      "required": true
+    },
+    "title": { "type": "string" },
+    "subtitle": { "type": "text" },
+    "content": { "type": "richtext" },
+    "image": { "type": "media", "allowedTypes": ["images"] },
+    "items": { "type": "component", "component": "shared.feature-item", "repeatable": true },
+    "settings": { "type": "json" }
+  }
+}

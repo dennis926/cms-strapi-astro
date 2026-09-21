@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getPage } from '../utils/api';
+
+const page = await getPage('franchise');
+---
+
+<Layout title="招商合作" description="加入我们，共创健康事业">
+  <section class="py-section">
+    <div class="max-w-6xl mx-auto px-6">
+      <h1 class="font-display text-4xl md:text-6xl font-bold text-center mb-12">招商合作</h1>
+      
+      <!-- 加盟优势 -->
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div class="text-center p-6 bg-surface-elevated rounded-lg">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">品牌优势</h3>
+          <p class="text-text-muted">知名品牌，市场认可度高</p>
+        </div>
+        <div class="text-center p-6 bg-surface-elevated rounded-lg">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">产品优势</h3>
+          <p class="text-text-muted">优质健康产品，市场竞争力强</p>
+        </div>
+        <div class="text-center p-6 bg-surface-elevated rounded-lg">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">支持优势</h3>
+          <p class="text-text-muted">全方位加盟支持，轻松创业</p>
+        </div>
+      </div>
+
+      <!-- 加盟流程 -->
+      <div class="mb-16">
+        <h2 class="font-display text-3xl font-bold text-center mb-8">加盟流程</h2>
+        <div class="grid md:grid-cols-5 gap-4">
+          {['咨询了解', '提交申请', '资格审核', '签约合作', '开业运营'].map((step, i) => (
+            <div class="text-center">
+              <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-2 font-bold">
+                {i + 1}
+              </div>
+              <p class="text-sm">{step}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 申请表单 -->
+      <div class="max-w-2xl mx-auto">
+        <h2 class="font-display text-3xl font-bold text-center mb-8">在线申请</h2>
+        <form id="franchise-form" class="space-y-4">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">姓名 *</label>
+              <input type="text" name="name" required class="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">电话 *</label>
+              <input type="tel" name="phone" required class="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">邮箱</label>
+              <input type="email" name="email" class="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">公司名称</label>
+              <input type="text" name="company" class="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">留言 *</label>
+            <textarea name="message" rows="4" required class="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+          </div>
+          <input type="hidden" name="formType" value="franchise" />
+          <button type="submit" class="w-full px-8 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
+            提交申请
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { submitForm } from '../utils/api';
+
+    document.getElementById('franchise-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
+      
+      try {
+        const result = await submitForm(data);
+        alert(result.message);
+        (e.target as HTMLFormElement).reset();
+      } catch (error) {
+        alert('提交失败，请稍后重试');
+      }
+    });
+  </script>
+</Layout>

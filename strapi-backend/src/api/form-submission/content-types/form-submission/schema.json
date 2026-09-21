@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "formSubmissions",
+  "info": {
+    "name": "Form Submission",
+    "description": "表单提交（招商申请、在线留言）"
+  },
+  "attributes": {
+    "formType": {
+      "type": "enumeration",
+      "enum": ["franchise", "contact", "other"],
+      "required": true
+    },
+    "name": { "type": "string", "required": true },
+    "phone": { "type": "string", "required": true },
+    "email": { "type": "email" },
+    "company": { "type": "string" },
+    "message": { "type": "text", "required": true },
+    "status": {
+      "type": "enumeration",
+      "enum": ["new", "processing", "resolved", "archived"],
+      "default": "new"
+    },
+    "notes": { "type": "text" },
+    "ipAddress": { "type": "string" },
+    "userAgent": { "type": "string" }
+  }
+}

@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getPage } from '../utils/api';
+
+const page = await getPage('about');
+---
+
+<Layout title="关于我们" description="了解卿尔美品牌">
+  <section class="py-section">
+    <div class="max-w-4xl mx-auto px-6">
+      <h1 class="font-display text-4xl md:text-6xl font-bold mb-8">关于我们</h1>
+      <div class="prose prose-lg max-w-none">
+        <p>卿尔美专注于健康食品领域，传承中华养生智慧，结合现代营养科学，为大众提供安全、有效的健康产品。</p>
+        <p>我们坚持以品质为本，以创新为驱动，致力于成为健康食品行业的领导品牌。</p>
+      </div>
+    </div>
+  </section>
+</Layout>

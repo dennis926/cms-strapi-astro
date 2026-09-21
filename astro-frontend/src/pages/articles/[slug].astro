@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getArticle } from '../utils/api';
+
+const { slug } = Astro.params;
+const article = await getArticle(slug);
+
+if (!article) {
+  return Astro.redirect('/404');
+}
+
+const jsonld = article.jsonld || {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: article.title,
+  description: article.excerpt,
+};
+---
+
+<Layout title={article.title} description={article.excerpt} jsonld={jsonld}>
+  <article class="py-section">
+    <div class="max-w-4xl mx-auto px-6">
+      <!-- 文章头部 -->
+      <header class="mb-8">
+        <h1 class="font-display text-3xl md:text-5xl font-bold mb-4">{article.title}</h1>
+        <div class="flex items-center gap-4 text-text-muted text-sm">
+          {article.author && <span>作者：{article.author.name}</span>}
+          <time datetime={article.publishedAt}>{new Date(article.publishedAt).toLocaleDateString('zh-CN')}</time>
+        </div>
+        {article.category && (
+          <span class="inline-block mt-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+            {article.category.name}
+          </span>
+        )}
+      </header>
+
+      <!-- 封面图 -->
+      {article.cover && (
+        <div class="aspect-video bg-surface-elevated rounded-lg overflow-hidden mb-8">
+          <img src={article.cover.url} alt={article.title} class="w-full h-full object-cover" />
+        </div>
+      )}
+
+      <!-- 文章内容 -->
+      <div class="prose prose-lg max-w-none" set:html={article.content} />
+
+      <!-- 标签 -->
+      {article.tags?.length > 0 && (
+        <div class="mt-8 pt-8 border-t border-border">
+          <div class="flex gap-2 flex-wrap">
+            {article.tags.map((tag: any) => (
+              <span class="px-3 py-1 bg-surface-elevated rounded-full text-sm">{tag.name}</span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </article>
+</Layout>

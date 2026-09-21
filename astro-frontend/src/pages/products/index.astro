@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getProducts } from '../utils/api';
+
+const products = await getProducts();
+---
+
+<Layout title="产品中心" description="卿尔美健康食品系列">
+  <section class="py-section">
+    <div class="max-w-6xl mx-auto px-6">
+      <h1 class="font-display text-4xl md:text-6xl font-bold text-center mb-12">产品中心</h1>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {products.data?.map((product: any) => (
+          <a href={`/products/${product.slug}`} class="group">
+            <div class="bg-surface-elevated rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+              <div class="aspect-video bg-border">
+                {product.cover && <img src={product.cover.url} alt={product.name} class="w-full h-full object-cover" />}
+              </div>
+              <div class="p-6">
+                <h2 class="text-xl font-semibold group-hover:text-primary transition-colors">{product.name}</h2>
+                <p class="text-text-muted mt-2 line-clamp-2">{product.subtitle || product.description?.substring(0, 100)}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

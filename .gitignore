@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+dist/
+build/
+.cache/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Strapi
+.strapi/
+.strapi-uploads/
+
+# Astro
+.astro/

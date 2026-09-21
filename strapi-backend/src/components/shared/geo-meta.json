@@ -1,0 +1,14 @@
+{
+  "kind": "component",
+  "collectionName": "shared",
+  "info": {
+    "name": "geo-meta",
+    "description": "GEO元数据"
+  },
+  "attributes": {
+    "geoEntities": { "type": "json" },
+    "geoFaq": { "type": "json" },
+    "geoHowto": { "type": "json" },
+    "geoAuthoritySignals": { "type": "json" }
+  }
+}

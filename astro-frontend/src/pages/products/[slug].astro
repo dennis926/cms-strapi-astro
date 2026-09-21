@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getProduct } from '../utils/api';
+
+const { slug } = Astro.params;
+const product = await getProduct(slug);
+---
+
+<Layout title={product?.name || '产品'} description={product?.subtitle}>
+  <section class="py-section">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- 产品图片 -->
+        <div class="space-y-4">
+          <div class="aspect-square bg-surface-elevated rounded-lg overflow-hidden">
+            {product?.cover && <img src={product.cover.url} alt={product.name} class="w-full h-full object-cover" />}
+          </div>
+          {product?.gallery?.length > 0 && (
+            <div class="grid grid-cols-4 gap-2">
+              {product.gallery.map((img: any) => (
+                <div class="aspect-square bg-surface-elevated rounded overflow-hidden">
+                  <img src={img.url} alt="" class="w-full h-full object-cover" />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- 产品信息 -->
+        <div>
+          <h1 class="font-display text-3xl md:text-4xl font-bold mb-4">{product?.name}</h1>
+          {product?.subtitle && <p class="text-xl text-text-muted mb-6">{product.subtitle}</p>}
+          
+          <div class="prose max-w-none mb-8">
+            {product?.description}
+          </div>
+
+          <!-- 产品特性 -->
+          {product?.features?.length > 0 && (
+            <div class="space-y-4">
+              <h2 class="text-xl font-semibold">产品特性</h2>
+              <div class="grid gap-4">
+                {product.features.map((feature: any) => (
+                  <div class="flex items-start gap-3">
+                    {feature.icon && (
+                      <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src={feature.icon.url} alt="" class="w-5 h-5" />
+                      </div>
+                    )}
+                    <div>
+                      <h3 class="font-semibold">{feature.title}</h3>
+                      <p class="text-text-muted text-sm">{feature.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- 咨询按钮 -->
+          <div class="mt-8">
+            <a href="/contact?type=product" class="inline-block px-8 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
+              咨询产品
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

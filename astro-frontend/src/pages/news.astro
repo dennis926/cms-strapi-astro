@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getArticles } from '../utils/api';
+
+const articles = await getArticles();
+---
+
+<Layout title="新闻动态" description="公司最新动态">
+  <section class="py-section">
+    <div class="max-w-6xl mx-auto px-6">
+      <h1 class="font-display text-4xl md:text-6xl font-bold text-center mb-12">新闻动态</h1>
+      <div class="space-y-6">
+        {articles.data?.map((article: any) => (
+          <a href={`/articles/${article.slug}`} class="block group">
+            <article class="flex gap-6 p-6 bg-surface-elevated rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+              <div class="w-48 h-32 bg-border rounded overflow-hidden flex-shrink-0">
+                {article.cover && <img src={article.cover.url} alt={article.title} class="w-full h-full object-cover" />}
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold group-hover:text-primary transition-colors">{article.title}</h2>
+                <p class="text-text-muted mt-2 line-clamp-2">{article.excerpt}</p>
+                <p class="text-sm text-text-muted mt-4">{new Date(article.publishedAt).toLocaleDateString('zh-CN')}</p>
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

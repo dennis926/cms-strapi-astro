@@ -1,0 +1,13 @@
+{
+  "kind": "component",
+  "collectionName": "shared",
+  "info": {
+    "name": "feature-item",
+    "description": "产品特性"
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "description": { "type": "text" },
+    "icon": { "type": "media", "allowedTypes": ["images"] }
+  }
+}

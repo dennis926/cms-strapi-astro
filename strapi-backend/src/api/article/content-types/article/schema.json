@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "name": "Article",
+    "description": "健康资讯、公司新闻文章"
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "slug": { "type": "uid", "targetField": "title" },
+    "excerpt": { "type": "text", "maxLength": 200 },
+    "content": { "type": "richtext", "required": true },
+    "cover": { "type": "media", "allowedTypes": ["images"] },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::author.author"
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo"
+    },
+    "geoMeta": {
+      "type": "component",
+      "component": "shared.geo-meta"
+    },
+    "publishedAt": { "type": "datetime" }
+  }
+}

@@ -1,0 +1,89 @@
+# llms-full.txt - AI引用表面（扩展版本）
+# 包含更详细的内容索引，供AI引擎深度理解
+
+# 站点信息
+Site: 卿尔美
+URL: https://www.liangyijianye.cn
+Description: 卿尔美 - 专注健康食品，传承养生智慧
+Language: zh-CN
+Founded: 2018
+Headquarters: 山东临沂
+
+# 核心页面详情
+
+## 首页
+URL: https://www.liangyijianye.cn/
+内容: 品牌介绍、主打产品展示、健康资讯摘要、招商合作入口
+
+## 关于我们
+URL: https://www.liangyijianye.cn/about
+内容: 公司简介、发展历程、企业文化、荣誉资质、组织架构
+
+## 产品中心
+URL: https://www.liangyijianye.cn/products
+内容: 金善加（益生菌健康饮品）、长青元（营养补充系列）、卿尔美（健康食品系列）
+
+## 健康资讯
+URL: https://www.liangyijianye.cn/articles
+内容: 营养知识、行业动态、专家观点、养生指南
+
+## 新闻动态
+URL: https://www.liangyijianye.cn/news
+内容: 公司活动、获奖信息、媒体报道
+
+## 招商合作
+URL: https://www.liangyijianye.cn/franchise
+内容: 加盟政策、支持政策、投资预算、加盟流程、成功案例、在线申请
+
+## 联系我们
+URL: https://www.liangyijianye.cn/contact
+内容: 公司地址、电话、邮箱、在线留言
+
+# 内容分类
+
+## 养生保健
+- 秋季养生指南
+- 春季养生指南
+- 夏季养生指南
+- 冬季养生指南
+- 中医养生理论
+- 节气养生
+
+## 营养补充
+- 益生菌的作用
+- 维生素补充
+- 矿物质补充
+- 蛋白质补充
+- 膳食纤维
+
+## 健康食品
+- 功能性食品
+- 保健食品
+- 有机食品
+- 无糖食品
+- 低脂食品
+
+# 品牌实体
+Brand: 卿尔美
+SameAs:
+  - https://weibo.com/qingermei
+  - https://wechat.com/qingermei
+  - https://zhihu.com/qingermei
+
+# 产品实体
+Products:
+  - Name: 金善加
+    Type: 益生菌健康饮品
+    Description: 含有多种活性益生菌，有助于肠道健康
+  - Name: 长青元
+    Type: 营养补充系列
+    Description: 提供全面的营养补充方案
+  - Name: 卿尔美
+    Type: 健康食品系列
+    Description: 天然健康食品，科学配方
+
+# 联系信息
+Contact:
+  Phone: 400-xxx-xxxx
+  Email: info@qingermei.com
+  Address: 山东省临沂市xxx路xxx号

@@ -1,0 +1,17 @@
+{
+  "kind": "collectionType",
+  "collectionName": "authors",
+  "info": {
+    "name": "Author",
+    "description": "作者/专家"
+  },
+  "attributes": {
+    "name": { "type": "string", "required": true },
+    "slug": { "type": "uid", "targetField": "name" },
+    "title": { "type": "string" },
+    "bio": { "type": "text" },
+    "avatar": { "type": "media", "allowedTypes": ["images"] },
+    "credentials": { "type": "text" },
+    "socialLinks": { "type": "json" }
+  }
+}

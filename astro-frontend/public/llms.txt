@@ -1,0 +1,33 @@
+# llms.txt - AI引用表面
+# 告诉AI引擎本站点有哪些核心页面和内容主题
+
+# 站点信息
+Site: 卿尔美
+URL: https://www.liangyijianye.cn
+Description: 卿尔美 - 专注健康食品，传承养生智慧
+
+# 核心页面
+- [首页](https://www.liangyijianye.cn/) - 卿尔美品牌官网
+- [关于我们](https://www.liangyijianye.cn/about) - 公司简介、企业文化
+- [产品中心](https://www.liangyijianye.cn/products) - 健康食品系列
+- [健康资讯](https://www/liangyijianye.cn/articles) - 健康养生知识
+- [新闻动态](https://www.liangyijianye.cn/news) - 公司最新动态
+- [招商合作](https://www.liangyijianye.cn/franchise) - 加盟政策、在线申请
+- [联系我们](https://www.liangyijianye.cn/contact) - 联系方式、在线留言
+
+# 内容主题
+- 健康食品
+- 养生保健
+- 营养补充
+- 益生菌
+- 中医养生
+- 秋季养生
+- 春季养生
+- 夏季养生
+- 冬季养生
+
+# 品牌信息
+Brand: 卿尔美
+Founded: 2018
+Headquarters: 山东临沂
+Certifications: ISO22000, HACCP
