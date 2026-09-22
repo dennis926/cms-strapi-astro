@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getPage } from '../utils/api';
+import Layout from '@layouts/Layout.astro';
+import { getPage } from '@utils/api';
 
 const page = await getPage('franchise');
 ---
@@ -94,7 +94,7 @@ const page = await getPage('franchise');
   </section>
 
   <script>
-    import { submitForm } from '../utils/api';
+    import { submitForm } from '@utils/api';
 
     document.getElementById('franchise-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();

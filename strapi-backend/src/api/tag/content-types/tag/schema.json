@@ -1,13 +1,15 @@
 {
   "kind": "collectionType",
   "info": {
-    "singularName": "tag",
-    "pluralName": "tags",
-    "displayName": "标签",
     "name": "Tag",
     "description": "标签"
   },
-  "options": { "draftAndPublish": true },
+  "options": {
+    "draftAndPublish": true,
+    "increments": true,
+    "timestamps": true,
+    "forceMigration": true
+  },
   "pluginOptions": {},
   "attributes": {
     "name": { "type": "string", "required": true },

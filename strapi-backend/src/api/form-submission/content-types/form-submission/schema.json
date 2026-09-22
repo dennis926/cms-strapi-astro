@@ -1,11 +1,14 @@
 {
   "kind": "collectionType",
   "info": {
-    "singularName": "form-submission",
-    "pluralName": "form-submissions",
-    "displayName": "表单提交",
     "name": "FormSubmission",
     "description": "表单提交（招商申请、在线留言）"
+  },
+  "options": {
+    "draftAndPublish": true,
+    "increments": true,
+    "timestamps": true,
+    "forceMigration": true
   },
   "pluginOptions": {},
   "attributes": {

@@ -1,6 +1,6 @@
 {
   "kind": "component",
-  "collectionName": "components_shared_geo_metas",
+  "collectionName": "shared_geo_meta",
   "info": {
     "name": "geoMeta",
     "description": "GEO元数据"

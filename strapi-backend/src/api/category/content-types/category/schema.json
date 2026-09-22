@@ -1,13 +1,15 @@
 {
   "kind": "collectionType",
   "info": {
-    "singularName": "category",
-    "pluralName": "categories",
-    "displayName": "分类",
     "name": "Category",
     "description": "分类"
   },
-  "options": { "draftAndPublish": true },
+  "options": {
+    "draftAndPublish": true,
+    "increments": true,
+    "timestamps": true,
+    "forceMigration": true
+  },
   "pluginOptions": {},
   "attributes": {
     "name": { "type": "string", "required": true },

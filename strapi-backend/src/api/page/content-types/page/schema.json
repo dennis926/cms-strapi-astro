@@ -1,13 +1,15 @@
 {
   "kind": "collectionType",
   "info": {
-    "singularName": "page",
-    "pluralName": "pages",
-    "displayName": "页面",
     "name": "Page",
     "description": "单页（关于我们、联系我们等）"
   },
-  "options": { "draftAndPublish": true },
+  "options": {
+    "draftAndPublish": true,
+    "increments": true,
+    "timestamps": true,
+    "forceMigration": true
+  },
   "pluginOptions": {},
   "attributes": {
     "title": { "type": "string", "required": true },
@@ -18,7 +20,6 @@
       "enum": ["default", "about", "contact", "franchise"],
       "default": "default"
     },
-    "blocks": { "type": "component", "component": "shared.page-block", "repeatable": true },
     "seo": { "type": "component", "component": "shared.seo", "repeatable": false },
     "geoMeta": { "type": "component", "component": "shared.geo-meta", "repeatable": false }
   }

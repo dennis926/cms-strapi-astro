@@ -1,14 +1,14 @@
 {
   "kind": "collectionType",
   "info": {
-    "singularName": "product",
-    "pluralName": "products",
-    "displayName": "产品",
     "name": "Product",
     "description": "产品"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": true,
+    "increments": true,
+    "timestamps": true,
+    "forceMigration": true
   },
   "pluginOptions": {},
   "attributes": {

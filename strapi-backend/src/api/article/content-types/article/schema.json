@@ -1,14 +1,14 @@
 {
   "kind": "collectionType",
   "info": {
-    "singularName": "article",
-    "pluralName": "articles",
-    "displayName": "文章",
     "name": "Article",
     "description": "文章（健康资讯、新闻）"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": true,
+    "increments": true,
+    "timestamps": true,
+    "forceMigration": true
   },
   "pluginOptions": {},
   "attributes": {

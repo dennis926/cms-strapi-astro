@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getArticle } from '../utils/api';
+import Layout from '@layouts/Layout.astro';
+import { getArticle } from '@utils/api';
 
 const { slug } = Astro.params;
 const article = await getArticle(slug);

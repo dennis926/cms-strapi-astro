@@ -1,19 +1,17 @@
-FROM node:20-alpine
+FROM node:18-bookworm
+
+# 配置国内 npm 镜像源
+RUN npm config set registry https://registry.npmmirror.com
 
 WORKDIR /app
 
-# 安装依赖
 COPY package*.json ./
 RUN npm install --production
 
-# 复制项目文件
 COPY . .
 
-# 构建Strapi
-RUN npm run build
+RUN mkdir -p public/uploads
 
-# 暴露端口
 EXPOSE 1337
 
-# 启动命令
-CMD ["npm", "start"]
+CMD ["npm", "run", "develop"]

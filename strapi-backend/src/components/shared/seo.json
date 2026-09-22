@@ -1,6 +1,6 @@
 {
   "kind": "component",
-  "collectionName": "components_shared_seos",
+  "collectionName": "shared_seo",
   "info": {
     "name": "seo",
     "description": "SEO元数据"
