@@ -1,151 +1,54 @@
-/**
- * Strapi API 工具函数
- */
-
 const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:1337';
-const API_TOKEN = import.meta.env.PUBLIC_API_TOKEN || '';
 
-/**
- * 获取API URL
- */
 export function getApiUrl(): string {
   return API_URL;
 }
 
-/**
- * 构建API请求URL
- */
-function buildUrl(path: string, params?: Record<string, any>) {
-  const url = new URL(`/api${path}`, API_URL);
-  if (params) {
-    Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        url.searchParams.append(key, String(value));
-      }
-    });
+async function safeFetch<T>(url: string): Promise<T | null> {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    const response = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeout);
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.data || null;
+  } catch {
+    return null;
   }
-  return url.toString();
 }
 
-/**
- * 通用请求函数
- */
-async function request<T>(url: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...(API_TOKEN && { Authorization: `Bearer ${API_TOKEN}` }),
-      ...options?.headers,
-    },
-    ...options,
-  });
-
-  if (!response.ok) {
-    throw new Error(`API Error: ${response.status}`);
-  }
-
-  return response.json();
+export async function getArticles() {
+  return safeFetch<any[]>(`${API_URL}/api/articles`) || { data: [], meta: { pagination: { total: 0 } } };
 }
 
-/**
- * 获取站点配置
- */
-export async function getSiteConfig() {
-  return request<{ data: any }>(buildUrl('/site-config')).then((res) => res.data);
-}
-
-/**
- * 获取文章列表
- */
-export async function getArticles(params?: { page?: number; pageSize?: number; category?: string }) {
-  const populate = ['seo', 'cover', 'category', 'tags', 'author'].join(',');
-  return request<{ data: any[]; meta: any }>(
-    buildUrl('/articles', { populate, ...params })
-  );
-}
-
-/**
- * 获取单篇文章
- */
 export async function getArticle(slug: string) {
-  const populate = ['seo', 'cover', 'category', 'tags', 'author', 'geoMeta'].join(',');
-  const result = await request<{ data: any }>(
-    buildUrl('/articles', { filters: { slug: { $eq: slug } }, populate })
-  );
-  return result.data?.[0];
+  const result = await safeFetch<any[]>(`${API_URL}/api/articles?filters[slug][$eq]=${slug}&populate=*`);
+  return result?.data?.[0] || null;
 }
 
-/**
- * 获取产品列表
- */
-export async function getProducts(params?: { page?: number; pageSize?: number; category?: string }) {
-  const populate = ['seo', 'cover', 'gallery', 'category', 'tags'].join(',');
-  return request<{ data: any[]; meta: any }>(
-    buildUrl('/products', { populate, ...params })
-  );
+export async function getProducts() {
+  return safeFetch<any[]>(`${API_URL}/api/products`) || { data: [], meta: { pagination: { total: 0 } } };
 }
 
-/**
- * 获取单个产品
- */
 export async function getProduct(slug: string) {
-  const populate = ['seo', 'cover', 'gallery', 'category', 'tags', 'features', 'geoMeta'].join(',');
-  const result = await request<{ data: any }>(
-    buildUrl('/products', { filters: { slug: { $eq: slug } }, populate })
-  );
-  return result.data?.[0];
+  const result = await safeFetch<any[]>(`${API_URL}/api/products?filters[slug][$eq]=${slug}&populate=*`);
+  return result?.data?.[0] || null;
 }
 
-/**
- * 获取单页面
- */
 export async function getPage(slug: string) {
-  const populate = ['seo', 'geoMeta', 'blocks'].join(',');
-  const result = await request<{ data: any }>(
-    buildUrl('/pages', { filters: { slug: { $eq: slug } }, populate })
-  );
-  return result.data?.[0];
+  return safeFetch<any>(`${API_URL}/api/${slug}`) || null;
 }
 
-/**
- * 获取分类列表
- */
-export async function getCategories() {
-  return request<{ data: any[] }>(buildUrl('/categories')).then((res) => res.data);
-}
-
-/**
- * 获取标签列表
- */
-export async function getTags() {
-  return request<{ data: any[] }>(buildUrl('/tags')).then((res) => res.data);
-}
-
-/**
- * 提交表单
- */
-export async function submitForm(data: {
-  name: string;
-  phone: string;
-  email?: string;
-  company?: string;
-  message: string;
-  formType?: string;
-}) {
-  return request<{ success: boolean; message: string; data: any }>(
-    buildUrl('/form-submissions'),
-    {
+export async function submitForm(data: any) {
+  try {
+    const response = await fetch(`${API_URL}/api/form-submissions`, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    }
-  );
-}
-
-/**
- * 格式化图片URL
- */
-export function getImageUrl(image: any) {
-  if (!image?.url) return '';
-  if (image.url.startsWith('http')) return image.url;
-  return `${API_URL}${image.url}`;
+    });
+    return response.json();
+  } catch (error) {
+    return { success: false, message: '提交失败' };
+  }
 }

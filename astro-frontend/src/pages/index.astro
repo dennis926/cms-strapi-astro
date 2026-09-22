@@ -1,90 +1,113 @@
 ---
-// 首页模板
-import Layout from '@layouts/Layout.astro';
-import { getApiUrl } from '@utils/api';
-
-// 获取最新内容
-const apiUrl = getApiUrl();
 ---
 
-<Layout title="首页" description="卿尔美 - 健康食品品牌">
-  <!-- Hero区域 -->
-  <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-surface-elevated"></div>
-    <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
-      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
-        卿尔美
-      </h1>
-      <p class="text-xl md:text-2xl text-text-muted max-w-2xl mx-auto mb-8">
-        专注健康食品，传承养生智慧
-      </p>
-      <div class="flex gap-4 justify-center">
-        <a href="/products" class="px-8 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
-          了解产品
-        </a>
-        <a href="/about" class="px-8 py-3 border border-border rounded-md hover:bg-surface-elevated transition-colors">
-          关于我们
-        </a>
-      </div>
-    </div>
-  </section>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>卿尔美 - 健康食品品牌</title>
+  <meta name="description" content="卿尔美 - 专注健康食品，传承养生智慧">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans SC',sans-serif;line-height:1.6;color:#1a1a2e;background:#fafbfc}
+    .container{max-width:72rem;margin:0 auto;padding:0 1.5rem}
+    header{position:sticky;top:0;z-index:50;background:rgba(250,251,252,0.85);backdrop-filter:blur(12px);border-bottom:1px solid #e5e7eb}
+    header nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+    header nav .logo{font-size:1.5rem;font-weight:700;text-decoration:none;color:#1a1a2e}
+    header nav ul{display:flex;gap:2rem;list-style:none}
+    header nav ul a{text-decoration:none;color:#6b7280;transition:color 0.2s}
+    header nav ul a:hover{color:#3b82f6}
+    .hero{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(16,185,129,0.05))}
+    .hero-content{position:relative;z-index:10}
+    .hero h1{font-size:clamp(3rem,8vw,5rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:1.5rem;background:linear-gradient(135deg,#3b82f6,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero p{font-size:1.25rem;color:#6b7280;max-width:36rem;margin:0 auto 2rem}
+    .hero .buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-block;padding:0.875rem 2rem;border-radius:0.5rem;text-decoration:none;font-weight:500;transition:all 0.2s}
+    .btn-primary{background:linear-gradient(135deg,#3b82f6,#2563eb);color:white;box-shadow:0 4px 14px rgba(59,130,246,0.3)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,0.4)}
+    .btn-outline{border:2px solid #e5e7eb;color:#374151}
+    .btn-outline:hover{border-color:#3b82f6;color:#3b82f6}
+    section{padding:clamp(4rem,10vw,8rem) 0}
+    .section-title{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;text-align:center;margin-bottom:3rem}
+    .grid{display:grid;gap:2rem}
+    .grid-3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    .card{background:white;border-radius:1rem;padding:2rem;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05),0 2px 4px -1px rgba(0,0,0,0.03);border:1px solid #f3f4f6;transition:all 0.3s}
+    .card:hover{transform:translateY(-4px);box-shadow:0 20px 25px -5px rgba(0,0,0,0.1)}
+    .card-icon{width:3rem;height:3rem;background:linear-gradient(135deg,#3b82f6,#10b981);border-radius:0.75rem;margin-bottom:1rem}
+    .card h3{font-size:1.25rem;font-weight:600;margin-bottom:0.5rem}
+    .card p{color:#6b7280}
+    .cta-section{text-align:center;background:linear-gradient(135deg,#3b82f6,#10b981);border-radius:2rem;padding:4rem 2rem;margin-top:4rem}
+    .cta-section h2{color:white;margin-bottom:1rem}
+    .cta-section p{color:rgba(255,255,255,0.9);margin-bottom:2rem}
+    .cta-section .btn{background:white;color:#3b82f6}
+    footer{background:#f9fafb;border-top:1px solid #e5e7eb;padding:3rem 0;text-align:center;color:#9ca3af;font-size:0.875rem}
+    @media(max-width:768px){header nav ul{display:none}.hero h1{font-size:2.5rem}}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="/" class="logo">卿尔美</a>
+      <ul>
+        <li><a href="/about">关于我们</a></li>
+        <li><a href="/products">产品中心</a></li>
+        <li><a href="/articles">健康资讯</a></li>
+        <li><a href="/news">新闻动态</a></li>
+        <li><a href="/franchise">招商合作</a></li>
+        <li><a href="/contact">联系我们</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- 产品展示 -->
-  <section class="py-section">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-center mb-12">主打产品</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- 产品卡片占位 -->
-        <div class="p-6 bg-surface-elevated rounded-lg shadow-md">
-          <div class="w-full h-48 bg-border rounded-md mb-4"></div>
-          <h3 class="text-xl font-semibold mb-2">金善加</h3>
-          <p class="text-text-muted">益生菌健康饮品</p>
-        </div>
-        <div class="p-6 bg-surface-elevated rounded-lg shadow-md">
-          <div class="w-full h-48 bg-border rounded-md mb-4"></div>
-          <h3 class="text-xl font-semibold mb-2">长青元</h3>
-          <p class="text-text-muted">营养补充系列</p>
-        </div>
-        <div class="p-6 bg-surface-elevated rounded-lg shadow-md">
-          <div class="w-full h-48 bg-border rounded-md mb-4"></div>
-          <h3 class="text-xl font-semibold mb-2">卿尔美</h3>
-          <p class="text-text-muted">健康食品系列</p>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>卿尔美</h1>
+        <p>专注健康食品，传承养生智慧。结合现代营养科学与传统养生理论，为大众提供安全、有效的健康产品。</p>
+        <div class="buttons">
+          <a href="/products" class="btn btn-primary">了解产品</a>
+          <a href="/about" class="btn btn-outline">关于我们</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 健康资讯 -->
-  <section class="py-section bg-surface-elevated">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-center mb-12">健康资讯</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- 文章卡片占位 -->
-        {
-          Array.from({ length: 6 }).map((_, i) => (
-            <article class="bg-surface rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <div class="w-full h-40 bg-border"></div>
-              <div class="p-4">
-                <h3 class="font-semibold mb-2">秋季养生指南</h3>
-                <p class="text-sm text-text-muted">2026年9月21日</p>
-              </div>
-            </article>
-          ))
-        }
+    <section class="container">
+      <h2 class="section-title">主打产品</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-icon"></div>
+          <h3>金善加</h3>
+          <p>益生菌健康饮品，调节肠道菌群，增强免疫力</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"></div>
+          <h3>长青元</h3>
+          <p>营养补充系列，科学配方，全面营养</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"></div>
+          <h3>卿尔美</h3>
+          <p>健康食品系列，天然食材，科学配方</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 招商合作CTA -->
-  <section class="py-section">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="font-display text-3xl md:text-4xl font-bold mb-6">招商合作</h2>
-      <p class="text-text-muted text-lg mb-8">
-        加入我们，共创健康事业
-      </p>
-      <a href="/franchise" class="inline-block px-8 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors">
-        了解加盟政策
-      </a>
+    <section class="container">
+      <div class="cta-section">
+        <h2>招商合作</h2>
+        <p>加入我们，共创健康事业。全方位加盟支持，轻松创业。</p>
+        <a href="/franchise" class="btn">了解加盟政策</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 卿尔美 版权所有 | 鲁ICP备xxxxxxxx号</p>
     </div>
-  </section>
-</Layout>
+  </footer>
+</body>
+</html>

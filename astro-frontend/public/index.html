@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>卿尔美 - 健康食品品牌</title>
+  <meta name="description" content="卿尔美 - 专注健康食品，传承养生智慧">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;color:#1a1a2e;background:#fafbfc;font-weight:400}
+    .container{max-width:72rem;margin:0 auto;padding:0 1.5rem}
+    
+    /* Header */
+    header{position:sticky;top:0;z-index:50;background:rgba(250,251,252,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.06);box-shadow:0 1px 3px rgba(0,0,0,0.02)}
+    header nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0}
+    header .logo{font-family:'Noto Serif SC',serif;font-size:1.75rem;font-weight:700;text-decoration:none;color:#1a1a2e;letter-spacing:0.05em}
+    header ul{display:flex;gap:2.5rem;list-style:none}
+    header ul a{text-decoration:none;color:#6b7280;font-size:0.95rem;font-weight:500;transition:all 0.2s;position:relative}
+    header ul a:hover{color:#3b82f6}
+    header ul a:hover::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:#3b82f6;border-radius:1px}
+    
+    /* Hero */
+    .hero{min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#fafbff 0%,#f0f4ff 50%,#ecfdf5 100%)}
+    .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(59,130,246,0.03) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(16,185,129,0.03) 0%,transparent 50%);animation:bgFloat 20s ease-in-out infinite}
+    @keyframes bgFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(-2%,1%)}}
+    .hero-content{position:relative;z-index:10;max-width:48rem}
+    .hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(3.5rem,9vw,6rem);font-weight:700;letter-spacing:-0.03em;margin-bottom:1.5rem;background:linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#10b981 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+    .hero p{font-size:1.25rem;color:#6b7280;max-width:36rem;margin:0 auto 2.5rem;font-weight:300;line-height:1.8}
+    .hero .buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:0.875rem 2rem;border-radius:0.5rem;text-decoration:none;font-weight:500;font-size:0.95rem;transition:all 0.25s;cursor:pointer}
+    .btn-primary{background:linear-gradient(135deg,#3b82f6,#2563eb);color:white;box-shadow:0 4px 14px rgba(59,130,246,0.25)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(59,130,246,0.35)}
+    .btn-outline{border:2px solid #e5e7eb;color:#374151;background:white}
+    .btn-outline:hover{border-color:#3b82f6;color:#3b82f6;box-shadow:0 4px 12px rgba(59,130,246,0.1)}
+    
+    /* Sections */
+    section{padding:clamp(4rem,10vw,7rem) 0}
+    .section-title{font-family:'Noto Serif SC',serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;text-align:center;margin-bottom:0.75rem;color:#1a1a2e}
+    .section-subtitle{text-align:center;color:#9ca3af;font-size:1rem;margin-bottom:3.5rem;font-weight:300}
+    
+    /* Grid */
+    .grid{display:grid;gap:2rem}
+    .grid-3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+    
+    .card{background:white;border-radius:1rem;padding:2.5rem 2rem;box-shadow:0 4px 6px -1px rgba(0,0,0,0.04),0 10px 15px -3px rgba(0,0,0,0.06);border:1px solid #f3f4f6;transition:all 0.35s;position:relative;overflow:hidden}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3b82f6,#10b981);opacity:0;transition:opacity 0.3s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 25px 50px -12px rgba(0,0,0,0.12)}
+    .card:hover::before{opacity:1}
+    .card-icon{width:3.5rem;height:3.5rem;background:linear-gradient(135deg,#3b82f6 0%,#10b981 100%);border-radius:0.875rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center}
+    .card-icon svg{width:1.75rem;height:1.75rem;fill:white}
+    .card h3{font-size:1.25rem;font-weight:600;margin-bottom:0.5rem;color:#1a1a2e}
+    .card p{color:#6b7280;font-size:0.95rem;line-height:1.7}
+    
+    /* CTA */
+    .cta-section{text-align:center;background:linear-gradient(135deg,#1e3a8a 0%,#1e40af 50%,#065f46 100%);border-radius:2.5rem;padding:5rem 2rem;margin-top:2rem;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+    .cta-section h2{color:white;font-family:'Noto Serif SC',serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:1rem;position:relative}
+    .cta-section p{color:rgba(255,255,255,0.85);margin-bottom:2.5rem;font-size:1.1rem;font-weight:300;position:relative}
+    .cta-section .btn{background:white;color:#1e40af;font-weight:600;padding:1rem 2.5rem;border-radius:0.75rem;box-shadow:0 8px 25px rgba(0,0,0,0.2);position:relative}
+    .cta-section .btn:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(0,0,0,0.3)}
+    
+    /* Footer */
+    background:#f9fafb;border-top:1px solid #e5e7eb;padding:3rem 0;text-align:center;color:#9ca3af;font-size:0.875rem}
+    
+    /* Responsive */
+    @media(max-width:768px){
+      header nav ul{display:none}
+      .hero h1{font-size:2.75rem}
+      .grid-3{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="/" class="logo">卿尔美</a>
+      <ul>
+        <li><a href="/about">关于我们</a></li>
+        <li><a href="/products">产品中心</a></li>
+        <li><a href="/articles">健康资讯</a></li>
+        <li><a href="/news">新闻动态</a></li>
+        <li><a href="/franchise">招商合作</a></li>
+        <li><a href="/contact">联系我们</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>卿尔美</h1>
+        <p>专注健康食品，传承养生智慧。结合现代营养科学与传统养生理论，为大众提供安全、有效的健康产品。</p>
+        <div class="buttons">
+          <a href="/products" class="btn btn-primary">了解产品</a>
+          <a href="/about" class="btn btn-outline">关于我们</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <h2 class="section-title">主打产品</h2>
+      <p class="section-subtitle">天然食材 · 科学配方 · 品质保证</p>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          </div>
+          <h3>金善加</h3>
+          <p>益生菌健康饮品，调节肠道菌群，增强免疫力，呵护您的肠胃健康</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          </div>
+          <h3>长青元</h3>
+          <p>营养补充系列，科学配方，全面营养，为您的健康保驾护航</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          </div>
+          <h3>卿尔美</h3>
+          <p>健康食品系列，天然食材，科学配方，健康生活的首选品牌</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="cta-section">
+        <h2>招商合作</h2>
+        <p>加入我们，共创健康事业。全方位加盟支持，轻松创业。</p>
+        <a href="/franchise" class="btn">了解加盟政策</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 卿尔美 版权所有 | 鲁ICP备xxxxxxxx号</p>
+    </div>
+  </footer>
+</body>
+</html>
